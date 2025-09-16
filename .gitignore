@@ -1,0 +1,37 @@
+# .gitignore
+
+# --- Python ---
+# Ignore Python's bytecode files and cache directories.
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Environment & Credentials ---
+# Ignore environment variables files. This is CRITICAL for security.
+# The .env file will contain your API keys and should never be on GitHub.
+.env
+
+# --- Virtual Environments ---
+# Ignore common Python virtual environment folders.
+.venv/
+venv/
+env/
+
+# --- Data & Storage ---
+# Ignore local data, datasets, and database storage volumes.
+# These are often large and should not be tracked by Git.
+/data/
+/qdrant_storage/
+/neo4j_data/
+/es_data/
+
+# --- IDE & Editor ---
+# Ignore configuration files from popular code editors.
+.idea/
+.vscode/
+*.swp
+
+# --- Notebooks ---
+# Ignore Jupyter notebook checkpoints.
+.ipynb_checkpoints

@@ -1,0 +1,80 @@
+# docker-compose.yml
+
+# Specifies the version of the Docker Compose file format. Version "3.8" is a modern, stable version.
+version: "3.8"
+
+# Defines the services (containers) that make up our application.
+services:
+  # ----------------------------------------------------------------
+  # Qdrant: The Vector Database
+  # Purpose: Stores vector embeddings of our data for fast similarity search.
+  # This is the core of our retrieval system for most RAG architectures.
+  # ----------------------------------------------------------------
+  qdrant:
+    # Use the official Qdrant image from Docker Hub. 
+    # Using 'latest' is fine for development, but for production, you might pin a specific version (e.g., qdrant/qdrant:v1.9.1).
+    image: qdrant/qdrant:latest
+    container_name: rag_qdrant
+    
+    # Maps ports from the host machine to the container.
+    # - "6333:6333" maps the HTTP API port.
+    # - "6334:6334" maps the gRPC port for high-performance communication.
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+      
+    # Persists data even if the container is stopped or removed.
+    # It links the './qdrant_storage' directory on your host to '/qdrant/storage' inside the container.
+    volumes:
+      - ./qdrant_storage:/qdrant/storage
+
+  # ----------------------------------------------------------------
+  # Neo4j: The Graph Database
+  # Purpose: Stores data as a network of nodes and relationships.
+  # This is essential for our Graph RAG architecture, allowing us to find context through connections.
+  # ----------------------------------------------------------------
+  neo4j:
+    # Use the official Neo4j image. '5' ensures we get the latest version 5.x.
+    image: neo4j:5
+    container_name: rag_neo4j
+    
+    # Maps the Neo4j Browser (HTTP) and Bolt (database driver) ports.
+    ports:
+      - "7474:7474" # Web interface
+      - "7687:7687" # Bolt protocol for application access
+      
+    # Sets environment variables inside the container.
+    # NEO4J_AUTH sets the username and password. Here, it's 'neo4j/rag-password-!'.
+    environment:
+      - NEO4J_AUTH=neo4j/rag-password-!
+      
+    # Persists the graph data.
+    volumes:
+      - ./neo4j_data:/data
+
+  # ----------------------------------------------------------------
+  # Elasticsearch: The Search Engine
+  # Purpose: Provides powerful keyword search (like BM25).
+  # This is critical for our Hybrid RAG, where we combine keyword search with vector search.
+  # ----------------------------------------------------------------
+  elasticsearch:
+    # Use the official Elasticsearch image. Pinning a version like '8.15.0' is a good practice for consistency.
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.0
+    container_name: rag_elasticsearch
+    
+    # Configures Elasticsearch for a single-node development setup.
+    environment:
+      # 'discovery.type=single-node' is required for running a single Elasticsearch instance.
+      - discovery.type=single-node
+      # 'xpack.security.enabled=false' disables authentication for easier development access. NEVER do this in production.
+      - xpack.security.enabled=false
+      # Limits the memory Elasticsearch can use to prevent it from consuming all system RAM.
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      
+    # Maps the Elasticsearch REST API port.
+    ports:
+      - "9200:9200"
+      
+    # Persists the search indexes and data.
+    volumes:
+      - ./es_data:/usr/share/elasticsearch/data

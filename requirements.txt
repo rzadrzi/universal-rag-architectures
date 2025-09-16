@@ -1,0 +1,42 @@
+# requirements.txt
+
+# --- Core Frameworks ---
+fastapi
+uvicorn[standard]
+python-dotenv
+
+# --- LLM & RAG Libraries ---
+langchain
+langchain-openai
+llama-index
+transformers
+sentence-transformers
+
+# --- Databases & Search ---
+qdrant-client
+# weaviate-client # اگر از آن استفاده نمی‌کنی می‌توانی حذفش کنی
+neo4j
+elasticsearch
+rank-bm25
+
+# --- Data & Computation ---
+pandas
+numpy
+scikit-learn
+tqdm
+requests
+
+# --- Multi-modal Handling ---
+Pillow
+torch
+torchvision
+
+# --- Demo & UI ---
+streamlit
+gradio
+
+# --- Development & Testing ---
+pytest
+jupyterlab # برای کار راحت‌تر با نوت‌بوک‌ها
+black # برای فرمت‌بندی کد
+ruff # برای لینتینگ و بررسی کیفیت کد
