@@ -7,6 +7,8 @@ python-dotenv
 
 # --- LLM & RAG Libraries ---
 langchain
+langchain-community
+langchain-qdrant
 langchain-openai
 llama-index
 transformers
