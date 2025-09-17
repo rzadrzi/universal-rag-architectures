@@ -47,6 +47,7 @@ services:
     # NEO4J_AUTH sets the username and password. Here, it's 'neo4j/rag-password-!'.
     environment:
       - NEO4J_AUTH=neo4j/rag-password-!
+      - NEO4J_PLUGINS=["apoc"]
       
     # Persists the graph data.
     volumes:
