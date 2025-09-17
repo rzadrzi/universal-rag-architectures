@@ -9,6 +9,7 @@ python-dotenv
 langchain
 langchain-community
 langchain-qdrant
+langchain_experimental
 langchain-openai
 llama-index
 transformers
