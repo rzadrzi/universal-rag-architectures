@@ -83,6 +83,14 @@ Below is a comparison of the different RAG systems built in this repository.
     * **E-commerce:** "Show me blue formal shirts similar to this picture."
     * **Intelligent Tech Support:** A user uploads a screenshot of an error, and the system retrieves the correct troubleshooting guide.
     * **Content Discovery:** Finding relevant images, diagrams, or charts within a large database of documents.
+
+### 6. Agentic RAG (Router)
+
+* **Core Idea:** Uses an LLM-powered **agent** to act as an intelligent "smart dispatcher." Given a query, the agent's first step is to *reason* about the nature of the question and then *select the most appropriate retrieval tool* from a toolkit. For example, it might route a question about relationships to the Graph RAG pipeline and a question about general concepts to the Vector RAG pipeline.
+* **Strengths:** Highly flexible and robust. It can handle a wide variety of questions by dynamically choosing the best way to find an answer. It's easily extensible with new tools (e.g., adding a web search tool).
+* **Weaknesses:** Increased complexity and latency due to the agent's reasoning step. Can be more expensive due to the extra LLM call for routing.
+* **When to Use:** Advanced enterprise assistants that need to answer questions from many different types of data sources (vector, graph, relational databases, web, etc.).
+
 ---
 
 ## Tech Stack
