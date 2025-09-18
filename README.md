@@ -73,15 +73,16 @@ Below is a comparison of the different RAG systems built in this repository.
 
 * **When to Use:** The gold standard for production-grade enterprise search and complex Q&A systems. Ideal for technical documentation, e-commerce, and any domain where user queries can be both specific and vague.
 
----
+### 5. Multimodal RAG
 
-## Upcoming Architectures
-
-This project will continue to expand with the following pipelines:
-
-* **Multimodal RAG:** Retrieving information from both text and images.
-* **Agentic RAG:** Using LLM-powered agents to make intelligent decisions about which retrieval strategy to use for a given query.
-
+* **Core Idea:** This architecture expands the RAG pipeline beyond just text to include other data types, primarily images. Using a shared embedding space, it can retrieve relevant images based on a text query (or vice versa).
+* **Our Implementation:** We use a foundational approach where rich text descriptions of images are embedded and stored in a vector database. Each vector is linked to its corresponding image file. The system retrieves the most semantically similar description and then presents the associated image as the result.
+* **Strengths:** Allows for powerful cross-modal search (text-to-image). Unlocks the ability to query vast libraries of visual data with natural language.
+* **Weaknesses:** Our current implementation relies on the quality of the text descriptions rather than analyzing the image pixels directly. More advanced models like CLIP can create embeddings from the image itself for even greater accuracy.
+* **When to Use:**
+    * **E-commerce:** "Show me blue formal shirts similar to this picture."
+    * **Intelligent Tech Support:** A user uploads a screenshot of an error, and the system retrieves the correct troubleshooting guide.
+    * **Content Discovery:** Finding relevant images, diagrams, or charts within a large database of documents.
 ---
 
 ## Tech Stack
