@@ -17,9 +17,9 @@ sentence-transformers
 
 # --- Databases & Search ---
 qdrant-client
-# weaviate-client # اگر از آن استفاده نمی‌کنی می‌توانی حذفش کنی
+# weaviate-client 
 neo4j
-elasticsearch
+elasticsearch==8.15.0
 rank-bm25
 
 # --- Data & Computation ---
@@ -43,3 +43,4 @@ pytest
 jupyterlab # برای کار راحت‌تر با نوت‌بوک‌ها
 black # برای فرمت‌بندی کد
 ruff # برای لینتینگ و بررسی کیفیت کد
+requests

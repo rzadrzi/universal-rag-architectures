@@ -1,8 +1,5 @@
 # docker-compose.yml
 
-# Specifies the version of the Docker Compose file format. Version "3.8" is a modern, stable version.
-version: "3.8"
-
 # Defines the services (containers) that make up our application.
 services:
   # ----------------------------------------------------------------
@@ -59,23 +56,13 @@ services:
   # This is critical for our Hybrid RAG, where we combine keyword search with vector search.
   # ----------------------------------------------------------------
   elasticsearch:
-    # Use the official Elasticsearch image. Pinning a version like '8.15.0' is a good practice for consistency.
     image: docker.elastic.co/elasticsearch/elasticsearch:8.15.0
     container_name: rag_elasticsearch
-    
-    # Configures Elasticsearch for a single-node development setup.
     environment:
-      # 'discovery.type=single-node' is required for running a single Elasticsearch instance.
       - discovery.type=single-node
-      # 'xpack.security.enabled=false' disables authentication for easier development access. NEVER do this in production.
       - xpack.security.enabled=false
-      # Limits the memory Elasticsearch can use to prevent it from consuming all system RAM.
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      
-    # Maps the Elasticsearch REST API port.
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
     ports:
       - "9200:9200"
-      
-    # Persists the search indexes and data.
     volumes:
       - ./es_data:/usr/share/elasticsearch/data
