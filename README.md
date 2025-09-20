@@ -43,6 +43,8 @@ Below is a comparison of the different RAG systems built in this repository.
     * Quick prototypes and proof-of-concepts.
     * Simple Q&A bots over a well-defined and clean knowledge base.
 
+![Naive RAG](./images/Naive-RAG.png)
+
 ### 2. Retrieve-and-Rerank RAG
 
 * **Core Idea:** An improvement on Naive RAG that adds a second filtering stage. It first retrieves a larger number of documents (e.g., 10-20) and then uses a more powerful, slower model (a **reranker**) to score and re-order these documents based on their actual relevance to the query.
