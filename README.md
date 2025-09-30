@@ -86,6 +86,8 @@ Below is a comparison of the different RAG systems built in this repository.
     * **Intelligent Tech Support:** A user uploads a screenshot of an error, and the system retrieves the correct troubleshooting guide.
     * **Content Discovery:** Finding relevant images, diagrams, or charts within a large database of documents.
 
+![Multimodal RAG](./images/Multimodal-RAG.png)
+
 ### 6. Agentic RAG (Router)
 
 * **Core Idea:** Uses an LLM-powered **agent** to act as an intelligent "smart dispatcher." Given a query, the agent's first step is to *reason* about the nature of the question and then *select the most appropriate retrieval tool* from a toolkit. For example, it might route a question about relationships to the Graph RAG pipeline and a question about general concepts to the Vector RAG pipeline.
